@@ -19,7 +19,7 @@ jobs:
         - { sys: mingw32, env: i686 }
         - { sys: ucrt64,  env: ucrt-x86_64 }  # Experimental!
         - { sys: clang64, env: clang-x86_64 } # Experimental!
-    steps:
+      steps:
     - uses: msys2/setup-msys2@v2
       with:
         msystem: ${{matrix.sys}}
