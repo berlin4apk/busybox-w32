@@ -5,15 +5,12 @@ on: [push, pull_request]
 jobs:
   build:
     if: github.repository == 'rmyorston/busybox-w32' || github.repository == 'dscho/busybox-w32' || github.repository == 'berlin4apk/busybox-w32'
-    runs-on: windows-latest
+    runs-on: windows-2022
     steps:
     - uses: actions/checkout@v2
-    - uses: git-for-windows/setup-git-for-windows-sdk@v0
-      with:
-        flavor: build-installers # this includes all the required tools
-    - name: restrict PATH to Git for Windows' SDK (and Windows)
+    - name: restrict PATH to msys64 (and Windows)
       shell: bash
-      run: echo 'PATH=/mingw64/bin:/usr/bin/:/c/Windows/system32' >>$GITHUB_ENV
+      run: echo 'PATH=/c/msys64/usr/bin:/c/msys64/bin:/usr/bin/:/bin:/c/Windows/system32' >>$GITHUB_ENV
     - name: mingw64_defconfig
       shell: bash
       run: |
