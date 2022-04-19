@@ -9,13 +9,24 @@ jobs:
   build:
     if: github.repository == 'rmyorston/busybox-w32' || github.repository == 'dscho/busybox-w32' || github.repository == 'berlin4apk/busybox-w32'
     runs-on: windows-2022
+  defaults:
+    run:
+      shell: msys2 {0}
     steps:
+  - uses: msys2/setup-msys2@v2
+    with:
+      update: false
+      install: >-
+        base-devel
+        git
+  #- run: git config --global core.autocrlf input
+  #  shell: bash
     - uses: actions/checkout@v2
   #  - name: restrict PATH to msys64 (and Windows)
   #    shell: bash
  #     run: echo 'PATH=/c/msys64/usr/bin:/c/msys64/bin:/usr/bin/:/bin:/c/Windows/system32' >>$GITHUB_ENV
     - name: mingw64_defconfig
-      shell: /c/msys64/bin/bash
+      #shell: /c/msys64/bin/bash
       run: |
         # We do not _actually_ cross-compile
         sed -i 's/^\(CONFIG_CROSS_COMPILER_PREFIX=\).*/\1""/' configs/mingw*
