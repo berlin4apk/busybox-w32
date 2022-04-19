@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    if: github.repository == 'rmyorston/busybox-w32' || github.repository == 'dscho/busybox-w32'
+    if: github.repository == 'rmyorston/busybox-w32' || github.repository == 'dscho/busybox-w32' || github.repository == 'berlin4apk/busybox-w32'
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
